@@ -46,8 +46,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     // pass in the context and list of tweets
     @Override
     public int getItemCount() {
-        tweets.size();
-        return 0;
+        return tweets.size();
     }
 
     // define a view holder
