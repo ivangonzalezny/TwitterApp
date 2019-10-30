@@ -27,6 +27,7 @@ public class TimelineActivity extends AppCompatActivity {
     List<Tweet> tweets;
     TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
+    EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class TimelineActivity extends AppCompatActivity {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -54,10 +56,53 @@ public class TimelineActivity extends AppCompatActivity {
         // init the list of tweets and adapter
         tweets = new ArrayList<>();
         adapter = new TweetsAdapter(this, tweets);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+
         // recycler view setup: layout manager and the adapter
         rvTweets.setLayoutManager(new LinearLayoutManager(this));
         rvTweets.setAdapter(adapter);
+
+        scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                Log.i(TAG, "onLoadMore: " + page);
+                loadMoreData();
+            }
+        };
+        // adds the scroll listener to the recycle view
+        rvTweets.addOnScrollListener(scrollListener);
+
         populateHomeTimeline();
+    }
+
+    // this is where we will make another API call to get the next page of tweets and add the objects to our current list of tweets
+    private void loadMoreData() {
+        client.getNextPageOfTweets(new JsonHttpResponseHandler() {
+            // 1. Send an API request to retrieve appropriate paginated data
+
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                Log.i(TAG, "onSuccess on: loadMoreData(): " + json.toString());
+                // 2. Deserialize and construct new model objects from the API response
+                JSONArray jsonArray = json.jsonArray;
+                try {
+                    List<Tweet> tweets = Tweet.fromJsonArray(jsonArray);
+                    // 3. Append the new data objects to the existing set of items inside the array of items
+                    // 4. Notify the adapter of the new items made with `notifyItemRangeInserted()`
+                    Log.i(TAG, "onSuccess on load More Data(): " + json.toString());
+                    adapter.addAll(tweets);
+                } catch (JSONException e) {
+                    Log.i(TAG, "JSON Exception", e);
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.i(TAG, "onFailure on: loadMoreData()", throwable);
+            }
+        }, tweets.get(tweets.size() - 1).id);
     }
 
     private void populateHomeTimeline() {
@@ -73,6 +118,7 @@ public class TimelineActivity extends AppCompatActivity {
 //                    adapter.notifyDataSetChanged();
                     // Now we call setRefreshing(false) to signal refresh has finished
                     swipeContainer.setRefreshing(false);
+                    Log.i(TAG, "onSuccess: adapter called successfully");
                 } catch (JSONException e) {
                     Log.i(TAG, "JSON Exception", e);
                 }
@@ -81,7 +127,6 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                 Log.i(TAG, "onFailure: " + response, throwable);
-
             }
         });
     }
