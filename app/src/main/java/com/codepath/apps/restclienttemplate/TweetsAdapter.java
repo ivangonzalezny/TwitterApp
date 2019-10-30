@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     public TweetsAdapter(Context context, List<Tweet> tweets) {
         this.context = context;
         this.tweets = tweets;
+        Log.i("Tweets Adapter: ", "constructor called");
     }
 
     // for each row inflate a layout
@@ -31,6 +33,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_tweet, parent, false);
+        Log.i("onCreateViewHolder: ", "TweetsAdapter: called");
         return new ViewHolder(view);
     }
 
@@ -41,11 +44,13 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         Tweet tweet = tweets.get(position);
         // find the tweet with the viewholder
         holder.bind(tweet);
+        Log.i("onBindViewHolder: ","TweetsAdapter: called");
     }
 
     // pass in the context and list of tweets
     @Override
     public int getItemCount() {
+        Log.i("Tweets Adapter: ", "getItemCount() called");
         return tweets.size();
     }
 
@@ -55,12 +60,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     public void clear() {
         tweets.clear();
         notifyDataSetChanged();
+        Log.i("Tweets Adapter: ", "clear() called");
     }
 
     // Add a list of items -- change to type used
     public void addAll(List<Tweet> tweetList) {
         tweets.addAll(tweetList);
         notifyDataSetChanged();
+        Log.i("Tweets Adapter: ", "addAll() called");
     }
 
     // define a view holder
@@ -75,12 +82,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvBody = itemView.findViewById(R.id.tvBody);
             tvScreenName = itemView.findViewById(R.id.tvSceenName);
+            Log.i("ViewHolder: ", "TweetsAdapter: called");
         }
 
         public void bind(Tweet tweet) {
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
             Glide.with(context).load(tweet.user.profileImageURL).into(ivProfileImage);
+            Log.i("bind:", "Tweets Adapter: called");
         }
     }
 }

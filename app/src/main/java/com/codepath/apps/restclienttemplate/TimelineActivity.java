@@ -46,7 +46,7 @@ public class TimelineActivity extends AppCompatActivity {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.i(TAG, "Fetching new data");
+                Log.i(TAG, "setOnRefreshListener(): Fetching new data");
                 populateHomeTimeline();
             }
         });
@@ -56,11 +56,12 @@ public class TimelineActivity extends AppCompatActivity {
         // init the list of tweets and adapter
         tweets = new ArrayList<>();
         adapter = new TweetsAdapter(this, tweets);
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
         // recycler view setup: layout manager and the adapter
-        rvTweets.setLayoutManager(new LinearLayoutManager(this));
+        //rvTweets.setLayoutManager(new LinearLayoutManager(this));
+        rvTweets.setLayoutManager(layoutManager);
+        Log.i(TAG, "setLayoutManager");
         rvTweets.setAdapter(adapter);
 
         scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
@@ -72,8 +73,10 @@ public class TimelineActivity extends AppCompatActivity {
         };
         // adds the scroll listener to the recycle view
         rvTweets.addOnScrollListener(scrollListener);
+        Log.i(TAG, "addOnScrollListener() called");
 
         populateHomeTimeline();
+        Log.i(TAG, "populateHomeTimeline() called");
     }
 
     // this is where we will make another API call to get the next page of tweets and add the objects to our current list of tweets
