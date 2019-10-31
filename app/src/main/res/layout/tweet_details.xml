@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivProfileImage"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:contentDescription="@string/profile_image"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvScreenName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/ivProfileImage" />
+
+    <ImageView
+        android:id="@+id/ivBody"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_below="@+id/tvBody"
+        android:contentDescription="@string/body_image"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/tvBody"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:layout_below="@+id/ivProfileImage" />
+
+    <TextView
+        android:id="@+id/tvTimeAndDate"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ivBody" />
+</RelativeLayout>

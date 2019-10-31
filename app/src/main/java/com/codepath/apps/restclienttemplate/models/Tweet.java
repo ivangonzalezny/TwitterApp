@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tweet {
-    public  String body;
+    public String body;
     public String createdAt;
     public long id;
     public User user;

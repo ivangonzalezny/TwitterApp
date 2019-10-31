@@ -1,12 +1,13 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
-import android.media.Image;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -76,20 +79,35 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageView ivProfileImage;
         TextView tvBody;
         TextView tvScreenName;
+        RelativeLayout container;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvBody = itemView.findViewById(R.id.tvBody);
-            tvScreenName = itemView.findViewById(R.id.tvSceenName);
+            tvScreenName = itemView.findViewById(R.id.tvScreenName);
+            container = itemView.findViewById(R.id.container);
             Log.i("ViewHolder: ", "TweetsAdapter: called");
         }
 
-        public void bind(Tweet tweet) {
+        public void bind(final Tweet tweet) {
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
             Glide.with(context).load(tweet.user.profileImageURL).into(ivProfileImage);
             Log.i("bind:", "Tweets Adapter: called");
+
+
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // direct to a new activity
+                    //Toast.makeText(context,movie.getTitle(),Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(context, TweetDetailActivity.class);
+                    //i.putExtra("title", movie.getTitle());
+                    i.putExtra("tweet", Parcels.wrap(tweet));
+                    context.startActivity(i);
+                }
+            });
         }
     }
 }

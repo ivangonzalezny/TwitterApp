@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -77,6 +78,9 @@ public class TimelineActivity extends AppCompatActivity {
 
         populateHomeTimeline();
         Log.i(TAG, "populateHomeTimeline() called");
+
+//        Intent i = new Intent(this, TweetDetailActivity.class);
+//        startActivity(i);
     }
 
     // this is where we will make another API call to get the next page of tweets and add the objects to our current list of tweets
