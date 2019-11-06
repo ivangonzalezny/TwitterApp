@@ -8,6 +8,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -110,6 +113,22 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.i(TAG, "onFailure on: loadMoreData()", throwable);
             }
         }, tweets.get(tweets.size() - 1).id);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.compose) {
+            Toast.makeText(this, "compose", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ComposeActivity.class);
+            startActivity(intent);
+        }
+        return true;
     }
 
     private void populateHomeTimeline() {

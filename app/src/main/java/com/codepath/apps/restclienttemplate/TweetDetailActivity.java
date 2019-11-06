@@ -38,6 +38,7 @@ public class TweetDetailActivity extends AppCompatActivity {
         tvBody = findViewById(R.id.tvBody);
         tvTimeAndDate = findViewById(R.id.tvTimeAndDate);
 
+
         Tweet tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
         tvScreenName.setText(tweet.user.screenName);
         tvBody.setText(tweet.body);
