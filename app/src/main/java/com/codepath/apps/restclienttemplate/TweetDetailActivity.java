@@ -28,6 +28,8 @@ public class TweetDetailActivity extends AppCompatActivity {
     TextView tvScreenName;
     TextView tvBody;
     TextView tvTimeAndDate;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,14 +1,19 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import android.util.Log;
+
 import com.codepath.apps.restclienttemplate.TwitterClient;
 
+import org.jetbrains.annotations.Contract;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 public class Tweet {
     public String body;
     public String createdAt;
@@ -17,6 +22,10 @@ public class Tweet {
 
     // empty constructor for parcel object
     public Tweet() {
+    }
+
+    public String print() {
+        return ("Tweet: " + body + " user: " + user + " created: " + createdAt);
     }
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
@@ -37,4 +46,5 @@ public class Tweet {
 
         return tweets;
     }
+
 }
