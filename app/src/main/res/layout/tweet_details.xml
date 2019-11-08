@@ -30,7 +30,8 @@
         android:id="@+id/tvBody"
         android:layout_width="match_parent"
         android:layout_height="175dp"
-        android:layout_below="@+id/ivProfileImage" />
+        android:layout_below="@+id/ivProfileImage"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvTimeAndDate"

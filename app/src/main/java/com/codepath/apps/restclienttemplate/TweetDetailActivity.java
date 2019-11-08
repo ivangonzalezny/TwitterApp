@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -40,11 +41,11 @@ public class TweetDetailActivity extends AppCompatActivity {
         tvBody = findViewById(R.id.tvBody);
         tvTimeAndDate = findViewById(R.id.tvTimeAndDate);
 
-
         Tweet tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
         tvScreenName.setText(tweet.user.screenName);
         tvBody.setText(tweet.body);
         tvTimeAndDate.setText(tweet.createdAt);
+        Glide.with(this).load(tweet.user.profileImageURL).into(ivProfileImage);
+        Log.i("Detail Tweet", "created");
     }
-
 }

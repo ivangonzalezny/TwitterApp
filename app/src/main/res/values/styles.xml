@@ -7,11 +7,20 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        <item name="android:colorPrimary" > @color/colorPrimary</item>
+        <item name="android:colorPrimaryDark"> @color/colorPrimaryDark</item>
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:colorPrimary" > @color/colorPrimary</item>
+        <item name="android:colorPrimaryDark"> @color/colorPrimaryDark</item>
+
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
+        <item name="android:textSize"> 20dp </item>
+        <item name="android:textColor"> #FFFFFF </item>
+    </style>
 </resources>

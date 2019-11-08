@@ -18,6 +18,19 @@
         android:minLines="7"
         tools:text="@string/wtf" />
 
+    <EditText
+        android:inputType="text"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:id="@+id/etValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCompose"
+        android:importantForAutofill="no"
+        android:hint="@string/zero">
+    </EditText>
+
+
     <Button
         android:id="@+id/btnTweet"
         android:layout_width="wrap_content"
