@@ -7,8 +7,6 @@ Submitted by: **Ivan Gonzalez**
 
 # Twitter App - Part 2
 
-Time spent: **X** hours spent in total
-
 ## User Stories
 
 The following **required** functionality is completed:
