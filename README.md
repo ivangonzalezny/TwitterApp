@@ -1,4 +1,4 @@
-# Project 2 - Twitter App
+# Twitter App
 
 Submitted by: **Ivan Gonzalez**
 
